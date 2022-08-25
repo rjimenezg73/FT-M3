@@ -1,5 +1,6 @@
 var http = require('http');
 var fs   = require('fs');
+const { encode } = require('punycode');
 
 var beatles=[{
   name: "John Lennon",
@@ -22,3 +23,47 @@ var beatles=[{
   profilePic:"http://cp91279.biography.com/BIO_Bio-Shorts_0_Ringo-Starr_SF_HD_768x432-16x9.jpg"
 }
 ]
+
+http.createServer((req, res) => {
+  if(req.url === '/api'){
+    res.writeHead(200, {'Content-type':'application/json'});
+    res.end(JSON.stringify(beatles));
+  }
+  if(req.url.substring(0, 5) === '/api/' && req.url.length > 5){
+    let encuentraBeatle = req.url.split('/').pop();
+    let seEncuentraBeatle = beatles.find((encontrado) => encuentraBeatle === encodeURI(encontrado.name));
+    if(seEncuentraBeatle){
+      res.writeHead(200, {'Content-type':'application/json'});
+      res.end(JSON.stringify(seEncuentraBeatle));
+    }else{
+      res.writeHead(404, {'Content-type':'text/plain'});
+      res.end('Este Beatle no existe');
+    }
+  }
+
+  if(req.url === '/'){
+    res.writeHead(200, {'Content-type':'text/html'});
+    const indexFile = fs.readFileSync(`${__dirname}/index.html`, 'utf-8');
+    res.end(indexFile);
+
+  }
+
+   let encuentraBeatle = req.url.split('/').pop();
+   let seEncuentraBeatle = beatles.find((encontrado) => encuentraBeatle === encodeURI(encontrado.name));
+   if(seEncuentraBeatle){
+     res.writeHead(200, {'Content-type':'text/html'});
+     let readFileHTML = fs.readFileSync(`${__dirname}/beatle.html`, 'utf-8');
+     console.log(`${__dirname}/beatle.html`);
+     console.log(seEncuentraBeatle.name);
+   
+     readFileHTML = readFileHTML.replace(/{name}/g,seEncuentraBeatle.name);
+     readFileHTML = readFileHTML.replace('{birthdate}',seEncuentraBeatle.birthdate);
+     readFileHTML = readFileHTML.replace('{profilePic}',seEncuentraBeatle.profilePic);
+     res.end(readFileHTML);
+   }else{
+     res.writeHead(404, {'Content-type':'text/plain'});
+     res.end('Este Beatle no existe');
+   }
+
+
+}).listen(1338, '127.0.0.1');

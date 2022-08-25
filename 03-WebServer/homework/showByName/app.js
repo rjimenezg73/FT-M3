@@ -8,13 +8,13 @@ http.createServer( function(req, res){
   console.log(req.url);
   console.log(`${__dirname}/images${req.url}_doge.jpg`);
 
-	fs.readFile(`${__dirname}/images${req.url}_doge.jpg`, (err, data) => {
+	fs.readFile(`${__dirname}/images${req.url}_doge.jpg`, (err, imagen) => {
     if(err){
       res.writeHead(404, { 'Content-type':'text/plain'});
       res.end(`¡ERROR!, archivo ${req.url} no existe... `);
     }else{
       res.writeHead(200, { 'Content-type':'image/jpg'});
-      res.end(data);
+      res.end(imagen);
     }
   });
 

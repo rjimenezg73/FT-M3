@@ -168,7 +168,10 @@ function problemE () {
   // promise version
   // ???
   promisifiedReadFile('poem-one/stanza-03.txt')
-    .then( stanza3 => {blue(stanza3); return  promisifiedReadFile('poem-one/wrong-file-name.txt')})
+    .then( stanza3 => {
+      blue(stanza3); 
+      return  promisifiedReadFile('poem-one/wrong-file-name.txt')
+    })
     .then(stanza => blue(stanza))
     .catch(err => magenta(new Error(err)))
   }
