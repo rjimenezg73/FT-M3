@@ -8,13 +8,13 @@ var primerMetodo = function() {
    return promise;
 };
  
- uno.then(function(data) {
-   return segundoMetodo(data);
- }).then(function(data) {
-   return tercerMetodo(data);
- }).then(function(data) {
-   console.log(data);
- })
+//  uno.then(function(data) {
+//    return segundoMetodo(data);
+//  }).then(function(data) {
+//    return tercerMetodo(data);
+//  }).then(function(data) {
+//    console.log(data);
+//  })
 
 
 var segundoMetodo = function(datos) {

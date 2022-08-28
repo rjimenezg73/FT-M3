@@ -13,17 +13,22 @@ var promise = new Promise(function(resolve, reject) {
   }); 
 });
 
-var nuevaDataPromesa = promise.then(function(data) {
-  var nuevaData = data.split('').splice(0, 100).join('');
-  return nuevaData;
-})
+// var nuevaDataPromesa = promise.then(function(data) {
+//   var nuevaData = data.split('').splice(0, 100).join('');
+//   return nuevaData;
+// })
 
-console.log(promise);
+console.log('1. ', promise);
 
 promise.then(function(data) {
   console.log('se cumplió la promesa');
+  console.log('2. ', data);
+}, err => {
+  console.log('4. ', err);
 })
 
+
+console.log('3. Holii');
 
 var lectura;
 fs.readFile('./archivo.txt', 'utf8', function(err, data) { 
@@ -36,22 +41,22 @@ console.log(lectura);
 
 
 
-   dataBase.verifyUser(username, password, (error, userInfo) => {
-       if (error) {
-           callback(error)
-       }else{
-           dataBase.getRoles(username, (error, roles) => {
-               if (error){
-                   callback(error)
-               }else {
-                   dataBase.logAccess(username, (error) => {
-                       if (error){
-                           callback(error);
-                       }else{
-                           callback(null, userInfo, roles);
-                       }
-                   })
-               }
-           })
-       }
-   })
+  //  dataBase.verifyUser(username, password, (error, userInfo) => {
+  //      if (error) {
+  //          callback(error)
+  //      }else{
+  //          dataBase.getRoles(username, (error, roles) => {
+  //              if (error){
+  //                  callback(error)
+  //              }else {
+  //                  dataBase.logAccess(username, (error) => {
+  //                      if (error){
+  //                          callback(error);
+  //                      }else{
+  //                          callback(null, userInfo, roles);
+  //                      }
+  //                  })
+  //              }
+  //          })
+  //      }
+  //  })
