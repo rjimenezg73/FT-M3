@@ -4,6 +4,8 @@ const app = require('../index.js'); // Importo el archivo de entrada del server 
 const agent = session(app);
 
 describe('Test de APIS', () => {
+
+  // ESTE ESTA OKOKOKOK
   describe('GET /', () => {
     it('responds with 200', () => agent.get('/').expect(200));
     it('responds with and object with message `hola`', () =>
@@ -12,11 +14,12 @@ describe('Test de APIS', () => {
         }));
   });
 
+  // OK OK OK OK
   describe('GET /test', () => {
     it('responds with 200', () => agent.get('/test').expect(200));
     it('responds with and object with message `test`', () =>
       agent.get('/test').then((res) => {
-        expect(res.body.message).toEqual('hola');
+        expect(res.body.message).toEqual('test');
       }));
   });
 
@@ -31,7 +34,7 @@ describe('Test de APIS', () => {
     );
   });
 
-  describe('POST /producto', () => {
+  describe('POST /product', () => {
     it('responds with 200', () => agent.post('/product').expect(200));
     it('responds with the product of 2 and 3', () =>
       agent.post('/product')
@@ -43,8 +46,8 @@ describe('Test de APIS', () => {
   });
 
   describe('POST /sumArray', () => {
-    it('responds with 200', () => agent.get('/test').expect(200));
-    it('responds with and object with message `test`', () =>
+    it('responds with 200', () => agent.post('/sumArray').expect(200));
+    it('true si la suma de algun par del array es igual a num', () =>
       agent.post('/sumArray')
         .send({array: [2,5,7,10,11,15,20], num: 13})
         .then((res) => {

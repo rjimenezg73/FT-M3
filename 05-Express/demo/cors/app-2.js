@@ -16,6 +16,7 @@ var corsOptions = {
 }
 
 //Seteamos headers para la respuesta que le enviamos al cliente
+//Al no definir ruta es para todas mis rutas
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3001'); //Autorizo recibir solicitudes de este dominio
     res.header('Access-Control-Allow-Credentials', true); //Autorizo recibir solicitudes que incluyan el encabezado con credenciales
